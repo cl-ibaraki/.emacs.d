@@ -185,4 +185,28 @@
     )
   )
 
+;; tex環境
+(use-package yatex
+  :ensure t
+  :mode (("\\.tex\\'" . yatex-mode))
+  :custom
+  (tex-command "platex2pdf")
+  (dvi2-command "evince")
+  (bibtex-command "upbibtex")
+  :config
+  (defun replace-dot-comma ()
+    (let ((curpos (point)))
+      (goto-char (point-min))
+      (while (search-forward "。" nil t) (replace-match "．"))
+      (goto-char (point-min))
+      (while (search-forward "、" nil t) (replace-match "，"))
+      (goto-char curpos)
+      ))
+  :hook (before-save replace-dot-comma)
+  )
 
+;; パッケージ依存の整合性確保のために勝手に追加される記述を外部に
+;; http://extra-vision.blogspot.com/2016/10/emacs25-package-selected-packages.html
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
