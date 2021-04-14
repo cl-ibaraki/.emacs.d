@@ -159,7 +159,9 @@
   :hook
   (python-mode . elpy-enable)
   (elpy-enable . elpy-mode)
-  (before-save . elpy-format-code)
+  (elpy-mode . (lambda ()
+		 (add-hook 'before-save-hook 'elpy-format-code nil 'make-it-local)
+		 ))
   :custom
   (elpy-rpc-python-command "python3")
   :config
@@ -181,7 +183,10 @@
     )
   (use-package py-isort
     :ensure t
-    :hook (before-save . py-isort-before-save)
+    :hook
+    (elpy-mode . (lambda ()
+		   (add-hook 'before-save-hook 'py-isort-before-save nil 'make-it-local)
+		   ))
     )
   )
 
@@ -193,7 +198,7 @@
   (tex-command "platex2pdf")
   (dvi2-command "evince")
   (bibtex-command "upbibtex")
-  :config
+  :init
   (defun replace-dot-comma ()
     (let ((curpos (point)))
       (goto-char (point-min))
@@ -202,7 +207,10 @@
       (while (search-forward "、" nil t) (replace-match "，"))
       (goto-char curpos)
       ))
-  :hook (before-save replace-dot-comma)
+  :hook
+  (yatex-mode . (lambda ()
+		  (add-hook 'before-save-hook 'replace-dot-comma nil 'make-it-local)
+		  ))
   )
 
 ;; パッケージ依存の整合性確保のために勝手に追加される記述を外部に
