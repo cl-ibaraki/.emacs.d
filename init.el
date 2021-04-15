@@ -129,12 +129,8 @@
 
 ;; デバッカ
 ;; https://github.com/realgud/realgud
-(defun run-debugger ()
-  (interactive) ;; この関数をコマンドとして実行させるために必要
-  (message "Debugger Not Found"))
 (use-package realgud
   :ensure t
-  :bind ("C-d" . run-debugger)
   )
 
 ;; python開発環境 pyvenv pipenv elpy
@@ -159,20 +155,23 @@
   :hook
   (python-mode . elpy-enable)
   (elpy-enable . elpy-mode)
-  (before-save . elpy-format-code)
+  (elpy-mode . (lambda ()
+		 (add-hook 'before-save-hook 'elpy-format-code nil 'make-it-local)
+		 ))
   :custom
   (elpy-rpc-python-command "python3")
+  :bind (:map elpy-mode-map
+	      ("C-d" . realgud:pdb)
+	      )
   :config
-  (defun run-debugger ()
-    (interactive)
-    (realgud:pdb))
   (use-package flycheck
     :ensure t
     :hook (elpy-mode . flycheck-mode)
-    :bind
-    ("C-e" . flycheck-list-errors)
-    ("C-n" . flycheck-next-error)
-    ("C-p" . flycheck-previous-error)
+    :bind (:map flycheck-mode-map
+		("C-e" . flycheck-list-errors)
+		("C-n" . flycheck-next-error)
+		("C-p" . flycheck-previous-error)
+		)
     :custom (elpy-modules (delq 'elpy-module-flymake elpy-modules))
     :custom-face
     (flycheck-warning ((t (:background "#F2E700")))) ;;警告の強調表示
@@ -181,8 +180,38 @@
     )
   (use-package py-isort
     :ensure t
-    :hook (before-save . py-isort-before-save)
+    :hook
+    (elpy-mode . (lambda ()
+		   (add-hook 'before-save-hook 'py-isort-before-save nil 'make-it-local)
+		   ))
     )
   )
 
+;; tex環境
+(use-package yatex
+  :ensure t
+  :mode (("\\.tex\\'" . yatex-mode))
+  :custom
+  (tex-command "platex2pdf")
+  (dvi2-command "evince")
+  (bibtex-command "upbibtex")
+  :init
+  (defun replace-dot-comma ()
+    (let ((curpos (point)))
+      (goto-char (point-min))
+      (while (search-forward "。" nil t) (replace-match "．"))
+      (goto-char (point-min))
+      (while (search-forward "、" nil t) (replace-match "，"))
+      (goto-char curpos)
+      ))
+  :hook
+  (yatex-mode . (lambda ()
+		  (add-hook 'before-save-hook 'replace-dot-comma nil 'make-it-local)
+		  ))
+  )
 
+;; パッケージ依存の整合性確保のために勝手に追加される記述を外部に
+;; http://extra-vision.blogspot.com/2016/10/emacs25-package-selected-packages.html
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
