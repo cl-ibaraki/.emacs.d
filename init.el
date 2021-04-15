@@ -129,12 +129,8 @@
 
 ;; デバッカ
 ;; https://github.com/realgud/realgud
-(defun run-debugger ()
-  (interactive) ;; この関数をコマンドとして実行させるために必要
-  (message "Debugger Not Found"))
 (use-package realgud
   :ensure t
-  :bind ("C-d" . run-debugger)
   )
 
 ;; python開発環境 pyvenv pipenv elpy
@@ -164,17 +160,18 @@
 		 ))
   :custom
   (elpy-rpc-python-command "python3")
+  :bind (:map elpy-mode-map
+	      ("C-d" . realgud:pdb)
+	      )
   :config
-  (defun run-debugger ()
-    (interactive)
-    (realgud:pdb))
   (use-package flycheck
     :ensure t
     :hook (elpy-mode . flycheck-mode)
-    :bind
-    ("C-e" . flycheck-list-errors)
-    ("C-n" . flycheck-next-error)
-    ("C-p" . flycheck-previous-error)
+    :bind (:map flycheck-mode-map
+		("C-e" . flycheck-list-errors)
+		("C-n" . flycheck-next-error)
+		("C-p" . flycheck-previous-error)
+		)
     :custom (elpy-modules (delq 'elpy-module-flymake elpy-modules))
     :custom-face
     (flycheck-warning ((t (:background "#F2E700")))) ;;警告の強調表示
