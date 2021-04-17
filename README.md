@@ -41,7 +41,7 @@ CUIでもIDEのような開発環境を使用できることを目的として�
 
 各環境で全機能を使用するには、Emacs外部で別途インストールが必要なものがあります。
 
-各nlkenサーバではインストールされています^[Tex環境を除く] が、各自のPC環境で使用する場合はインストールしてください。
+各nlkenサーバではインストールされています（Tex環境を除く）が、各自のPC環境で使用する場合はインストールしてください。
 
 ## Python環境
 ### pipenv
@@ -72,6 +72,20 @@ pipenv install --dev flack8
 ## Tex環境
 Tex liveのインストールなどでTexの実行環境を整えてください。
 
+### プレビュー
+pdfプレビューに関してはGUIを介する必要があります。
+
+Puttyを使用している場合、
+
+Connection - SSH - X11 より、X11 forwardingのEnable X11 forwardingにチェックを入れます。
+
+さらに別途クライアント（Windows）側で、Xmingをインストールします。
+
+参考：[【Xming】インストールと使い方](https://www.teamxeppet.com/xming1/)
+
+GUIのEmacsを使用する場合には、pdf-toolsで対応するのが良さそう。
+
+参考：[Emacsでpdfを読む (pdf-tools)](https://taipapamotohus.com/post/pdf-tools/)
 
 # Putty設定
 Puttyは、ダイナミックポートフォワーディングに対応している（TeraTermは非対応）ため、学内限定サイトにアクセスしたい時などに大変便利です。
