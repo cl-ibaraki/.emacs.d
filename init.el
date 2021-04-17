@@ -210,6 +210,15 @@
 		  ))
   )
 
+;; Markdown環境
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  )
+
 ;; パッケージ依存の整合性確保のために勝手に追加される記述を外部に
 ;; http://extra-vision.blogspot.com/2016/10/emacs25-package-selected-packages.html
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
