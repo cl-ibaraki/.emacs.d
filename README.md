@@ -49,9 +49,9 @@ Ubuntuでは、システムのPython3にpipenvをインストールしておき�
 
 pipenvで高度なPythonのパッケージのバージョン管理と、emacsから仮想環境へのアクセス、実行ができます。
 
-`
+```
 pip3 install pipenv
-`
+```
 
 ### flycheck
 
@@ -61,9 +61,9 @@ pip3 install pipenv
 
 pipenv環境が入っていれば、`C-c C-s`でpipenvのシェルを起動し、
 
-`
+```
 pipenv install --dev flack8
-`
+```
 
 でインストールすると良いです。
 
@@ -77,12 +77,13 @@ pdfプレビューに関してはGUIを介する必要があります。
 
 * Puttyを使用している場合
 
-	1. Connection - SSH - X11 より、X11 forwardingのEnable X11 forwardingにチェックを入れます。
+	1. `Connection - SSH - X11` より、`X11 forwarding`の`Enable X11 forwarding`にチェックを入れます。
 	1. さらに別途クライアント（Windows）側で、Xmingをインストールします。
 
 	参考：[【Xming】インストールと使い方](https://www.teamxeppet.com/xming1/)
 
 * GUIのEmacsを使用する場合
+
 	pdf-toolsで対応するのが良さそう。
 
 	参考：[Emacsでpdfを読む (pdf-tools)](https://taipapamotohus.com/post/pdf-tools/)
@@ -99,9 +100,9 @@ pdfプレビューに関してはGUIを介する必要があります。
 
 次のコマンドでインストールしてください。
 
-`
+```
 sudo apt install pandoc
-`
+```
 
 # Putty設定
 [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)は、ダイナミックポートフォワーディングに対応している（TeraTermは非対応）ため、学内限定サイトにアクセスしたい時などに大変便利です。
