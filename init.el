@@ -217,6 +217,8 @@
   :mode (("README\\.md\\'" . gfm-mode)
 	 ("\\.md\\'" . markdown-mode)
 	 ("\\.markdown\\'" . markdown-mode))
+  :custom
+  (markdown-command "pandoc -c ~/.emacs.d/.pandoc/github.css")
   )
 
 ;; パッケージ依存の整合性確保のために勝手に追加される記述を外部に

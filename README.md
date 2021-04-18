@@ -50,7 +50,7 @@ Ubuntuでは、システムのPython3にpipenvをインストールしておき�
 pipenvで高度なPythonのパッケージのバージョン管理と、emacsから仮想環境へのアクセス、実行ができます。
 
 `
-sudo apt install pipenv
+pip3 install pipenv
 `
 
 ### flycheck
@@ -75,29 +75,45 @@ Tex liveのインストールなどでTexの実行環境を整えてください
 ### プレビュー
 pdfプレビューに関してはGUIを介する必要があります。
 
-Puttyを使用している場合、
+* Puttyを使用している場合
 
-Connection - SSH - X11 より、X11 forwardingのEnable X11 forwardingにチェックを入れます。
+	1. Connection - SSH - X11 より、X11 forwardingのEnable X11 forwardingにチェックを入れます。
+	1. さらに別途クライアント（Windows）側で、Xmingをインストールします。
 
-さらに別途クライアント（Windows）側で、Xmingをインストールします。
+	参考：[【Xming】インストールと使い方](https://www.teamxeppet.com/xming1/)
 
-参考：[【Xming】インストールと使い方](https://www.teamxeppet.com/xming1/)
+* GUIのEmacsを使用する場合
+	pdf-toolsで対応するのが良さそう。
 
-GUIのEmacsを使用する場合には、pdf-toolsで対応するのが良さそう。
+	参考：[Emacsでpdfを読む (pdf-tools)](https://taipapamotohus.com/post/pdf-tools/)
 
-参考：[Emacsでpdfを読む (pdf-tools)](https://taipapamotohus.com/post/pdf-tools/)
+## Markdown環境
+
+[Pandoc](https://pandoc-doc-ja.readthedocs.io/ja/latest/users-guide.html)は、
+**Markdown**や**HTML**、**LaTeX**などのマークアップ言語で書かれたテキストを、
+**Markdown**、**HTML**、**LaTeX**、**Word**、**PDF**などに変換できるドキュメント変換ツールです。
+
+参考：[多様なフォーマットに対応！ドキュメント変換ツールPandocを知ろう](https://qiita.com/sky_y/items/80bcd0f353ef5b8980ee)
+
+ここでは、EmacsのMarkdownモードでPandocによる変換を使用します。
+
+次のコマンドでインストールしてください。
+
+`
+sudo apt install pandoc
+`
 
 # Putty設定
-Puttyは、ダイナミックポートフォワーディングに対応している（TeraTermは非対応）ため、学内限定サイトにアクセスしたい時などに大変便利です。
+[Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)は、ダイナミックポートフォワーディングに対応している（TeraTermは非対応）ため、学内限定サイトにアクセスしたい時などに大変便利です。
 
 sshクライアントとしてPuttyを使用している場合、次の設定をしていると快適になります。
 
 ## Color
 通常設定だと、使用される色が限定されるので、拡張します。
 
-Connection - Data より、Terminal detailsのTerminal-type stringをxterm-256colorに設定します。
+`Connection - Data` より、`Terminal details`の`Terminal-type string`を`xterm-256color`に設定します。
 
 ## Bold
 通常設定だと、太字が表示されません。
 
-Window - Colours より、Indecate bolded by changingをThe fontに設定します。
+`Window - Colours` より、`Indecate bolded by changing`を`The font`に設定します。
