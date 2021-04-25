@@ -70,6 +70,12 @@
 	       (tramp-remote-shell "/bin/sh")
 	       (tramp-default-port 22)))
 
+;; 自分のワークスペースに飛ぶ用に設定
+(defun cd-home()
+  (interactive)
+  (cd "c:/Users/tanaka/Documents/emacs_home/")
+  )
+
 ;; カラーテーマ設定
 ;; Puttyから使用している場合、反映するには
 ;; xterm-256colorを設定する必要がある
