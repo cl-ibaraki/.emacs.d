@@ -35,6 +35,41 @@
 ;; 文字コード指定
 (set-default-coding-systems 'utf-8)
 
+;; tramp接続設定windows専用
+(require 'tramp)
+(add-to-list 'tramp-methods
+	     '("htnk"
+	       (tramp-login-program "plink")
+	       (tramp-login-args (("-t")
+				  ("-load" "shin-ppk")
+				  ("ssh" "-t" "htnk.dse.ibaraki.ac.jp")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-default-port 22)))
+(add-to-list 'tramp-methods
+	     '("nlken1"
+	       (tramp-login-program "plink")
+	       (tramp-login-args (("-t")
+				  ("-load" "shin-ppk")
+				  ("ssh" "-t" "nlken1.dse.ibaraki.ac.jp")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-default-port 22)))
+(add-to-list 'tramp-methods
+	     '("nlken5"
+	       (tramp-login-program "plink")
+	       (tramp-login-args (("-t")
+				  ("-load" "shin-ppk")
+				  ("ssh" "-t" "nlken5.dse.ibaraki.ac.jp")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-default-port 22)))
+(add-to-list 'tramp-methods
+	     '("nlken8"
+	       (tramp-login-program "plink")
+	       (tramp-login-args (("-t")
+				  ("-load" "shin-ppk")
+				  ("ssh" "-t" "nlken8.dse.ibaraki.ac.jp")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-default-port 22)))
+
 ;; カラーテーマ設定
 ;; Puttyから使用している場合、反映するには
 ;; xterm-256colorを設定する必要がある
