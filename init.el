@@ -32,6 +32,9 @@
 ;; バックアップファイル*~の保存先指定
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backup")))
 
+;; 文字コード指定
+(set-default-coding-systems 'utf-8)
+
 ;; カラーテーマ設定
 ;; Puttyから使用している場合、反映するには
 ;; xterm-256colorを設定する必要がある
